@@ -39,10 +39,10 @@ class App {
     this.searchResult = new SearchResult({
       $target,
       initialData: this.data,
-      onClick: (image) => {
-        this.imageInfo.setState({
+      onClick: (cat) => {
+        this.imageInfo.showDetail({
           visible: true,
-          image,
+          cat,
         });
       },
     });
