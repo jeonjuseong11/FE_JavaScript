@@ -5,6 +5,11 @@ const api = {
       res.json()
     );
   },
+  fetchCatsPage: (keyword, page) => {
+    return fetch(
+      `${API_ENDPOINT}/api/cats/search?q=${keyword}&page=${page}`
+    ).then((res) => res.json());
+  },
   fetchRandomCats: () => {
     return fetch(`${API_ENDPOINT}/api/cats/random50`).then((res) => res.json());
   },
