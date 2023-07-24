@@ -27,6 +27,13 @@ class App {
         });
         this.Loading.hide();
       },
+      onRandomSearch: () => {
+        this.Loading.show();
+        api.fetchRandomCats().then(({ data }) => {
+          this.setState(data);
+          this.Loading.hide();
+        });
+      },
     });
 
     this.searchResult = new SearchResult({
