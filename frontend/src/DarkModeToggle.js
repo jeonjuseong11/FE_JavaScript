@@ -2,18 +2,18 @@ class DarkModeToggle {
   isDarkMode = null; //상태 추가
 
   constructor({ $target }) {
-    const $wrapper = document.createElement("section");
+    const $wrapper = document.createElement(`section`);
 
     const $DarkModeToggle = document.createElement("input");
     this.$DarkModeToggle = $DarkModeToggle;
     this.$DarkModeToggle.type = "checkbox";
 
     $DarkModeToggle.className = "DarkModeToggle";
-    $DarkModeToggle.appendChild($DarkModeToggle);
+    $wrapper.appendChild($DarkModeToggle);
     $target.appendChild($wrapper);
 
     $DarkModeToggle.addEventListener("change", (e) => {
-      setColorMode(e.target.checked);
+      this.setColorMode(e.target.checked);
     });
     this.initColorMode();
   }
