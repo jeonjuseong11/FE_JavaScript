@@ -22,7 +22,6 @@ class SearchResult {
   }
 
   listObserver = new IntersectionObserver((items, observer) => {
-    console.log(items);
     items.forEach((item) => {
       //아이템이 화면에 보일 때
       if (item.isIntersecting) {
@@ -31,11 +30,9 @@ class SearchResult {
           item.target.querySelector("img").dataset.src; //dataset에 src로 대체함
 
         //마지막 요소를 찾아낸다.
-        // console.log(this.data.length);
         let dataIndex = Number(item.target.dataset.index);
         console.log(dataIndex);
         if (dataIndex + 1 === this.data.length) {
-          // console.log("마지막 페이지");
           this.onNextPage();
         }
         //마지막 요소라면 nextPage 호출
@@ -46,7 +43,7 @@ class SearchResult {
   render() {
     this.$searchResult.innerHTML = this.data
       .map(
-        (cat) => `
+        (cat, index) => `
           <li class="item" data-index=${index}> 
             <img src="https://via.placeholder.com/200x300" data-src=${cat.url} alt=${cat.name} />
           </li>
@@ -63,3 +60,4 @@ class SearchResult {
     });
   }
 }
+export default SearchResult;

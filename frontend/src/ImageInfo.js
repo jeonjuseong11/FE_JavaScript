@@ -1,3 +1,5 @@
+import api from "./api.js";
+
 class ImageInfo {
   $imageInfo = null;
   data = null;
@@ -17,12 +19,11 @@ class ImageInfo {
     this.data = nextData;
     this.render();
   }
-  showDetail(data) {
-    // 상세 정보 요청
-    // 정보 업데이트
-    api.fetchCatDetail(data.cat.id).then(({ data }) => {
-      this.setState({ visible: true, cat: data });
-    });
+  async showDetail(data) {
+    const detailInfo = await api.fetchCatDetail(data.cat.id);
+    if (detailInfo) {
+      this.setState({ visible: true, cat: detailInfo.data });
+    }
   }
 
   closeImageInfo() {
@@ -49,7 +50,7 @@ class ImageInfo {
           </div>
         </div>`;
       this.$imageInfo.style.display = "block";
-
+      //TODO : keypress, keydown, keyup 차이 리서치
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           this.closeImageInfo();
@@ -68,3 +69,4 @@ class ImageInfo {
     }
   }
 }
+export default ImageInfo;

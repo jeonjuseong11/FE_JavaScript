@@ -1,3 +1,4 @@
+import KeywordHistory from "./KeywordHistory.js";
 const TEMPLATE = '<input type="text">';
 
 class SearchInput {
@@ -8,6 +9,7 @@ class SearchInput {
     const $searchInput = document.createElement("input");
     this.$searchInput = $searchInput;
     this.$searchInput.placeholder = "고양이를 검색해보세요.|";
+    this.$searchInput.autofocus = true;
 
     $searchInput.className = "SearchInput";
     $wrapper.appendChild($searchInput);
@@ -37,3 +39,4 @@ class SearchInput {
   }
   render() {}
 }
+export default SearchInput;
