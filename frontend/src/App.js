@@ -22,7 +22,7 @@ class App {
         console.log("show");
         this.Loading.show();
         api.fetchCats(keyword).then(({ data }) => {
-          this.setState(data);
+          this.setState(data ? data : []);
           console.log("hide");
           this.Loading.hide();
           // 로컬에 저장
