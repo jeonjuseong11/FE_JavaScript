@@ -21,31 +21,34 @@ class SearchResult {
     this.render();
   }
 
-  isElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-  }
-  applyEventToElement = (items) => {
-    document.addEventListener("scroll", () => {
-      items.forEach((el, index) => {
-        if (this.isElementInViewport(el) && items.length - 1 === index) {
+  listObserver = new IntersectionObserver((items, observer) => {
+    console.log(items);
+    items.forEach((item) => {
+      //아이템이 화면에 보일 때
+      if (item.isIntersecting) {
+        //화면에 보이면 이미지를 로드
+        item.target.querySelector("img").src =
+          item.target.querySelector("img").dataset.src; //dataset에 src로 대체함
+
+        //마지막 요소를 찾아낸다.
+        // console.log(this.data.length);
+        let dataIndex = Number(item.target.dataset.index);
+        console.log(dataIndex);
+        if (dataIndex + 1 === this.data.length) {
+          // console.log("마지막 페이지");
           this.onNextPage();
         }
-      });
+        //마지막 요소라면 nextPage 호출
+      }
     });
-  };
+  });
+
   render() {
     this.$searchResult.innerHTML = this.data
       .map(
         (cat) => `
-          <li class="item">
-            <img src=${cat.url} alt=${cat.name} />
+          <li class="item" data-index=${index}> 
+            <img src="https://via.placeholder.com/200x300" data-src=${cat.url} alt=${cat.name} />
           </li>
         `
       )
@@ -55,9 +58,8 @@ class SearchResult {
       $item.addEventListener("click", () => {
         this.onClick(this.data[index]);
       });
-    });
 
-    let listItems = this.$searchResult.querySelectorAll(".item");
-    this.applyEventToElement(listItems);
+      this.listObserver.observe($item);
+    });
   }
 }
