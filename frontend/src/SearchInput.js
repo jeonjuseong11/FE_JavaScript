@@ -24,7 +24,7 @@ class SearchInput {
     this.$randomButton.className = "RandomButton";
     this.$randomButton.textContent = "랜덤고양이";
 
-    $wrapper.appendChild($searchInput);
+    $wrapper.appendChild($randomButton);
 
     $randomButton.addEventListener("click", (e) => {
       onRandomSearch();

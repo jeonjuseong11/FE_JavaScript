@@ -8,6 +8,10 @@
   --background: #000;
   --textColor: #fff;
 }
+:root[color-mode="white"] {
+  --background: #fff;
+  --textColor: #000;
+}
 body {
   background-color: var(--background);
   color: var(--textColor);
@@ -95,6 +99,9 @@ body * {
 
 .ImageInfo .content-wrapper img {
   width: 100%;
+}
+.ImageInfo .content-wrapper .close {
+  cursor: pointer;
 }
 .DarkModeToggle {
   width: 30px;
