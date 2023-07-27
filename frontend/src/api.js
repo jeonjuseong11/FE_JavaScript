@@ -1,5 +1,5 @@
-const { API_ENDPOINT, REQUEST_ERROR } = "./config.js";
-
+import config from "./config.js";
+const { API_ENDPOINT, REQUEST_ERROR } = config;
 const request = async (url) => {
   try {
     const result = await fetch(url);

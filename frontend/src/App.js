@@ -32,7 +32,7 @@ class App {
         console.log("show");
         this.Loading.show();
         api.fetchCats(keyword).then(({ data }) => {
-          this.setState({ items: data ? data : [], page: this.DEFAULT_PAGE });
+          this.setState({ items: data, page: this.DEFAULT_PAGE });
           console.log("hide");
           this.Loading.hide();
           // 로컬에 저장

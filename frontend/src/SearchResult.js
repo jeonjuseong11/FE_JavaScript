@@ -1,3 +1,5 @@
+import Empty from "./Empty.js";
+
 class SearchResult {
   $searchResult = null;
   data = null;
@@ -13,34 +15,47 @@ class SearchResult {
     this.data = initialData;
     this.onClick = onClick;
     this.onNextPage = onNextPage;
+
+    this.Empty = new Empty({
+      $target,
+    });
+
     this.render();
   }
 
   setState(nextData) {
     this.data = nextData;
     this.render();
+    this.Empty.show(nextData);
   }
 
   listObserver = new IntersectionObserver((items, observer) => {
     items.forEach((item) => {
-      //아이템이 화면에 보일 때
+      // 아이템이 화면에 보일 때
       if (item.isIntersecting) {
-        //화면에 보이면 이미지를 로드
-        item.target.querySelector("img").src =
-          item.target.querySelector("img").dataset.src; //dataset에 src로 대체함
+        // 화면에 보이면 이미지를 로드
+        const img = item.target.querySelector("img");
+        img.src = img.dataset.src; // dataset에 src로 대체함
 
-        //마지막 요소를 찾아낸다.
+        // 마지막 요소를 찾아낸다.
         let dataIndex = Number(item.target.dataset.index);
         console.log(dataIndex);
         if (dataIndex + 1 === this.data.length) {
           this.onNextPage();
         }
-        //마지막 요소라면 nextPage 호출
+        // 마지막 요소라면 nextPage 호출
       }
     });
   });
 
   render() {
+    // 데이터가 null 또는 undefined일 경우, 아무것도 렌더링하지 않습니다.
+    if (this.data.length === null || this.data.length === 0) {
+      this.$searchResult.style.display = "none";
+      return;
+    }
+    this.$searchResult.style.display = "grid";
+
     this.$searchResult.innerHTML = this.data
       .map(
         (cat, index) => `
@@ -60,4 +75,5 @@ class SearchResult {
     });
   }
 }
+
 export default SearchResult;
