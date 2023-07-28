@@ -56,8 +56,28 @@ body * {
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+  cursor: pointer;
+  position: relative;
 }
-
+.SearchResult .item:hover .content {
+  opacity: 1;
+}
+.SearchResult .item .content {
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .SearchInputSection {
   position: relative;
 }
