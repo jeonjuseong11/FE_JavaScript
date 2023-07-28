@@ -31,7 +31,7 @@ class App {
       onSearch: (keyword) => {
         console.log("show");
         this.Loading.show();
-        api.fetchCats(keyword).then(({ data }) => {
+        api.fetchCatsWithLimit(keyword, limit).then(({ data }) => {
           this.setState({ items: data, page: this.DEFAULT_PAGE });
           console.log("hide");
           this.Loading.hide();
