@@ -16,6 +16,7 @@ class SearchInput {
     $wrapper.appendChild($searchInput);
 
     $searchInput.addEventListener("keypress", (e) => {
+      console.log(this.$limitCount.value);
       if (e.key === "Enter") {
         onSearch(e.target.value, this.$limitCount.value);
         this.KeywordHistory.addKeyword(e.target.value);
